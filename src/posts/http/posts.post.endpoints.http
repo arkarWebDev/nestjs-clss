@@ -1,0 +1,12 @@
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+    "title":"test title 1",
+    "content":"test content 1",
+    "slug":"test-title-1",
+    "status" : "draft",
+    "tags" : ["ai","test"],
+    "featureImgUrl" : "https://codehubmm.com/images/logo.png",
+    "publishOn" : "2026-04-29T14:30:00.000Z"
+}
