@@ -7,6 +7,9 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { Post } from './posts/post.entity';
+import { TagsModule } from './tags/tags.module';
+import { PostMetaController } from './post-meta/post-meta.controller';
+import { PostMetaModule } from './post-meta/post-meta.module';
 
 @Module({
   imports: [
@@ -15,7 +18,8 @@ import { Post } from './posts/post.entity';
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      entities: [User, Post],
+      // entities: [User, Post],
+      autoLoadEntities: true,
       synchronize: true,
       port: 5432,
       username: 'postgres',
@@ -23,8 +27,10 @@ import { Post } from './posts/post.entity';
       host: 'localhost',
       database: 'nest-app',
     }),
+    TagsModule,
+    PostMetaModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, PostMetaController],
   providers: [AppService],
 })
 export class AppModule {}
