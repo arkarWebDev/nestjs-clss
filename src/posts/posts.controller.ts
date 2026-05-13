@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { PostsService } from './providers/posts.service';
 import { CreatePostDto } from './dtos/create.post.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -20,7 +29,16 @@ export class PostsController {
    */
   @Get('/:userId')
   public getPostsByUserId(@Param('userId') userId: string) {
-    return this.postsService.findAll(userId);
+    return this.postsService.findAllByUserId(userId);
+  }
+
+  /**
+   * Retruns all posts
+   * @returns
+   */
+  @Get('/')
+  public getPosts() {
+    return this.postsService.findAll();
   }
 
   /**
@@ -36,7 +54,7 @@ export class PostsController {
   })
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
-    console.log(createPostDto);
+    return this.postsService.create(createPostDto);
   }
 
   /**
@@ -53,5 +71,22 @@ export class PostsController {
   @Patch()
   public updatePost(@Body() patchPostDto: PatchPostDto) {
     console.log(patchPostDto);
+  }
+
+  /**
+   * Delete a blog post by ID
+   * @param id
+   * @returns
+   */
+  @ApiOperation({
+    summary: 'Delete a blog post',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'If you got 200 response, your post was deleted',
+  })
+  @Delete('/:id')
+  public deletePost(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.delete(id);
   }
 }
