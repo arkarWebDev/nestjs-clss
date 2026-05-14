@@ -69,14 +69,12 @@ export class UsersService {
 
   /**
    * Method to find specific user with id
-   * @param userId
+   * @param id
    * @returns
    */
-  public findByUserId(userId: string) {
-    return {
-      id: userId,
-      name: 'code hub',
-      email: 'admin@codehubmm.com',
-    };
+  public async findByUserId(id: number) {
+    return await this.userRespository.findOneBy({
+      id,
+    });
   }
 }

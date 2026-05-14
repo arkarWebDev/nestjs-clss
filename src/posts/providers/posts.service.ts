@@ -27,7 +27,16 @@ export class PostsService {
    * @returns
    */
   public async create(createPostDto: CreatePostDto) {
-    let post = this.postsRepository.create(createPostDto);
+    let author = await this.usersService.findByUserId(createPostDto.authorId);
+
+    if (!author) {
+      throw new Error('Author not found');
+    }
+
+    let post = this.postsRepository.create({
+      ...createPostDto,
+      author,
+    });
     post = await this.postsRepository.save(post);
     return post;
   }
@@ -37,7 +46,11 @@ export class PostsService {
    * @returns
    */
   public async findAll() {
-    const posts = this.postsRepository.find();
+    const posts = this.postsRepository.find({
+      relations: {
+        author: true,
+      },
+    });
     return posts;
   }
 
@@ -46,7 +59,7 @@ export class PostsService {
    * @param userId - The ID of the user whose posts to fetch
    * @returns Array of post objects with associated user info
    */
-  public findAllByUserId(userId: string) {
+  public findAllByUserId(userId: number) {
     const user = this.usersService.findByUserId(userId);
 
     return [

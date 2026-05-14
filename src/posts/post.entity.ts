@@ -2,12 +2,14 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { postStatus } from './enums/postStatus.enum';
 import { Tag } from 'src/tags/tag.entity';
 import { PostMeta } from 'src/post-meta/post-meta.entity';
+import { User } from 'src/users/user.entity';
 
 @Entity()
 export class Post {
@@ -62,4 +64,7 @@ export class Post {
     eager: true,
   })
   meta!: PostMeta;
+
+  @ManyToOne(() => User, (user) => user.posts)
+  author!: User;
 }

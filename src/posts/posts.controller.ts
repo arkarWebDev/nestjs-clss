@@ -28,7 +28,7 @@ export class PostsController {
    * @param userId - The user ID from the route parameter
    */
   @Get('/:userId')
-  public getPostsByUserId(@Param('userId') userId: string) {
+  public getPostsByUserId(@Param('userId', ParseIntPipe) userId: number) {
     return this.postsService.findAllByUserId(userId);
   }
 

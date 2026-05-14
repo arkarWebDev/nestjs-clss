@@ -22,7 +22,7 @@ export class AuthService {
    * @param id - User's ID
    * @returns A token string
    */
-  public login(email: string, password: string, id: string) {
+  public login(email: string, password: string, id: number) {
     const user = this.usersService.findByUserId(id);
     // login
     return 'TOKEN';

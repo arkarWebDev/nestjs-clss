@@ -11,5 +11,6 @@ Content-Type: application/json
     "publishOn" : "2026-04-29T14:30:00.000Z",
     "meta" : {
         "readTime" : "2 min read"
-    }
+    },
+    "authorId" : 1
 }

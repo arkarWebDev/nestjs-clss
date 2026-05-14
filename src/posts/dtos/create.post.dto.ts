@@ -1,6 +1,8 @@
 import {
   IsArray,
   IsEnum,
+  IsInt,
+  isInt,
   IsISO8601,
   IsNotEmpty,
   IsOptional,
@@ -99,4 +101,13 @@ export class CreatePostDto {
   @Type(() => CreatePostMetaDto)
   @IsNotEmpty()
   meta!: CreatePostMetaDto;
+
+  /** Required post author id */
+  @ApiProperty({
+    description: 'Author id for the post',
+    example: 1,
+  })
+  @IsNotEmpty()
+  @IsInt()
+  authorId!: number;
 }

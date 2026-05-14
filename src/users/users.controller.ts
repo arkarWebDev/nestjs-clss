@@ -73,7 +73,7 @@ export class UsersController {
     description: 'User fetched successfully',
   })
   getUser(@Param() getUserDto: GetUserDto) {
-    return this.usersService.findByUserId(getUserDto.id.toString());
+    return this.usersService.findByUserId(getUserDto.id);
   }
 
   /**
