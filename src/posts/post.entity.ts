@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -57,6 +59,8 @@ export class Post {
   })
   publishOn?: string;
 
+  @ManyToMany(() => Tag)
+  @JoinTable()
   tags?: Tag[];
 
   @OneToOne(() => PostMeta, (postMeta) => postMeta.post, {

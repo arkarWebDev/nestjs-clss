@@ -83,14 +83,13 @@ export class CreatePostDto {
 
   /** Optional array of tag strings (each min 2 characters) */
   @ApiPropertyOptional({
-    description: 'Array of tags for blog post',
-    type: [CreateTagDto],
+    description: 'Array of tag ids for blog post',
+    example: [1, 2, 3],
   })
   @IsOptional()
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateTagDto)
-  tags?: CreateTagDto[];
+  @IsInt({ each: true })
+  tags?: number[];
 
   /** Required post meta (e.g. readTime) */
   @ApiProperty({
