@@ -7,3 +7,23 @@ Content-Type: application/json
     "email":"arkarkyaw@codehub.com",
     "password":"HelloWorld1@"
 }
+
+POST http://localhost:3000/users/create-many
+Content-Type: application/json
+
+{
+    "users" : [
+        {
+            "firstName":"Jhon",
+            "lastName":"Doe",
+            "email":"johndoe@codehub.com",
+            "password":"HelloWorld1@"
+        },
+        {
+            "firstName":"Jack",
+            "lastName":"Doe",
+            "email":"jackdoe@codehub.com",
+            "password":"HelloWorld1@"
+        }
+    ]
+}

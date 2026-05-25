@@ -15,6 +15,7 @@ import { GetUserDto } from './dtos/get.user.dto';
 import { PutUserDto } from './dtos/put.user.dto';
 import { UsersService } from './providers/users.service';
 import { ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 
 /**
  * Controller to handle HTTP requests for the users resource
@@ -94,5 +95,10 @@ export class UsersController {
     console.log(putUserDto);
 
     return 'Update user endpoint hit';
+  }
+
+  @Post('create-many')
+  public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
+    return this.usersService.createMany(createUsersDto);
   }
 }
