@@ -16,9 +16,9 @@ export class User {
   @Column({
     type: 'varchar',
     length: 20,
-    nullable: false,
+    nullable: true,
   })
-  lastName!: string;
+  lastName?: string;
 
   @Column({
     type: 'varchar',
@@ -30,7 +30,7 @@ export class User {
 
   @Column({
     type: 'varchar',
-    length: 20,
+    length: 60,
     nullable: false,
   })
   password!: string;

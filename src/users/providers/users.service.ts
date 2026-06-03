@@ -14,6 +14,7 @@ import * as config from '@nestjs/config';
 import authConfig from '../config/auth.config';
 import { UsersCreateManyProvider } from './users-create-many.provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
+import { CreateUserProvider } from './create-user.provider';
 
 /**
  * Class to connect to Users table and make business tasks
@@ -40,12 +41,17 @@ export class UsersService {
      * Inject user repository
      */
     @InjectRepository(User)
-    private userRespository: Repository<User>,
+    private usersRepository: Repository<User>,
 
     /**
      * Inject usersCreeateManyProvider
      */
     private readonly usersCreateManyProvider: UsersCreateManyProvider,
+
+    /**
+     * Inject createUserProvider
+     */
+    private readonly createUserProvider: CreateUserProvider,
   ) {}
 
   /**
@@ -54,43 +60,7 @@ export class UsersService {
    * @returns
    */
   public async createUser(createUserDto: CreateUserDto) {
-    // email exist or not
-    let existingUser;
-
-    try {
-      existingUser = await this.userRespository.findOne({
-        where: { email: createUserDto.email },
-      });
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Cannot process your request this time.',
-        {
-          description: 'Error when connecting to database',
-        },
-      );
-    }
-    // handle flow
-    if (existingUser) {
-      throw new BadRequestException(
-        'Email already exists, please check your email.',
-      );
-    }
-
-    // create new user
-    let newUser = this.userRespository.create(createUserDto);
-
-    try {
-      newUser = await this.userRespository.save(newUser);
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Cannot process your request this time.',
-        {
-          description: 'Error when connecting to database',
-        },
-      );
-    }
-
-    return newUser;
+    return this.createUserProvider.createUser(createUserDto);
   }
 
   /**
@@ -129,7 +99,7 @@ export class UsersService {
   public async findByUserId(id: number) {
     let user;
     try {
-      user = await this.userRespository.findOneBy({
+      user = await this.usersRepository.findOneBy({
         id,
       });
     } catch (error) {
