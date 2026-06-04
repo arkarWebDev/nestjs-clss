@@ -15,6 +15,7 @@ import authConfig from '../config/auth.config';
 import { UsersCreateManyProvider } from './users-create-many.provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 import { CreateUserProvider } from './create-user.provider';
+import { FindByUserEmailProvider } from './find-by-user-email.provider';
 
 /**
  * Class to connect to Users table and make business tasks
@@ -52,6 +53,11 @@ export class UsersService {
      * Inject createUserProvider
      */
     private readonly createUserProvider: CreateUserProvider,
+
+    /**
+     * Inject findByUserEmailProvider
+     */
+    private readonly findByUserEmailProvider: FindByUserEmailProvider,
   ) {}
 
   /**
@@ -119,5 +125,9 @@ export class UsersService {
 
   public async createMany(createUsersDto: CreateManyUsersDto) {
     return await this.usersCreateManyProvider.createMany(createUsersDto);
+  }
+
+  public async findUserByEmail(email: string) {
+    return await this.findByUserEmailProvider.findByEmail(email);
   }
 }

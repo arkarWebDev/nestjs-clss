@@ -1,5 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
+import { SignInDto } from '../dtos/signin.dto';
+import { SignInProvider } from './sign-in.provider';
 
 /**
  * Service to handle authentication logic
@@ -13,6 +15,11 @@ export class AuthService {
   constructor(
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
+
+    /**
+     * Inject signInProvider
+     */
+    private readonly signInProvider: SignInProvider,
   ) {}
 
   /**
@@ -22,10 +29,8 @@ export class AuthService {
    * @param id - User's ID
    * @returns A token string
    */
-  public login(email: string, password: string, id: number) {
-    const user = this.usersService.findByUserId(id);
-    // login
-    return 'TOKEN';
+  public async signIn(signInDto: SignInDto) {
+    return await this.signInProvider.signIn(signInDto);
   }
 
   /**
