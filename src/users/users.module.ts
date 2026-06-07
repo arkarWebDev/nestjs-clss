@@ -12,7 +12,12 @@ import authConfig from './config/auth.config';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersCreateManyProvider, CreateUserProvider, FindByUserEmailProvider],
+  providers: [
+    UsersService,
+    UsersCreateManyProvider,
+    CreateUserProvider,
+    FindByUserEmailProvider,
+  ],
   exports: [UsersService],
   imports: [
     forwardRef(() => AuthModule),
