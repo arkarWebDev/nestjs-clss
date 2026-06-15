@@ -8,12 +8,14 @@ import {
   Patch,
   Post,
   Query,
+  Req,
 } from '@nestjs/common';
 import { PostsService } from './providers/posts.service';
 import { CreatePostDto } from './dtos/create.post.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PatchPostDto } from './dtos/patch.post.dto';
 import { GetPostsDto } from './dtos/get-posts.dto';
+import { User } from 'src/auth/decorators/user.decorator';
 
 /**
  * Controller to handle HTTP requests for the posts resource
@@ -55,8 +57,8 @@ export class PostsController {
     description: 'If you got 201 response, your post is created',
   })
   @Post()
-  public createPost(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+  public createPost(@Body() createPostDto: CreatePostDto, @User() user) {
+    return this.postsService.create(createPostDto, user);
   }
 
   /**

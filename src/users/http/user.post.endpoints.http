@@ -1,6 +1,6 @@
 POST http://localhost:3000/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImVtYWlsIjoiamFtZXNkb2VAY29kZWh1Ym1tLmNvbSIsImlhdCI6MTc4MDg1MDg3MiwiZXhwIjoxNzgwODU0NDcyLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.aUtO-0NA8yagEKm2fjV4ICOFkYFj2XkE2k9mUAEkQ64
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImVtYWlsIjoiamFtZXNkb2VAY29kZWh1Ym1tLmNvbSIsImlhdCI6MTc4MTU1MTI3NCwiZXhwIjoxNzgxNTU0ODc0LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.Ov_NLIOl2XIYWWB09nwpKZ_0q5zcFl5uL5TKEwsJhkI
 {
     "firstName":"James",
     "lastName":"Doe",

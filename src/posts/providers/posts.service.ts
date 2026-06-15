@@ -8,6 +8,8 @@ import { TagsService } from 'src/tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch.post.dto';
 import { GetPostsDto } from '../dtos/get-posts.dto';
 import { PaginationProvider } from 'src/common/pagination/provider/pagination.provider';
+import { CreatePostProvider } from './create-post.provider';
+import { UserData } from 'src/auth/interfaces/user-data.interface';
 
 /**
  * Service to handle business logic for posts
@@ -25,6 +27,8 @@ export class PostsService {
     private readonly tagsService: TagsService,
     /**Inject paginationProvider */
     private readonly paginationProvider: PaginationProvider,
+    /**Inject paginationProvider */
+    private readonly createPostProvider: CreatePostProvider,
     /** Inject postsRepository */
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
@@ -35,22 +39,8 @@ export class PostsService {
    * @param createPostDto
    * @returns
    */
-  public async create(createPostDto: CreatePostDto) {
-    let author = await this.usersService.findByUserId(createPostDto.authorId);
-
-    if (!author) {
-      throw new Error('Author not found');
-    }
-
-    let tags = await this.tagsService.findMultiTags(createPostDto.tags!);
-
-    let post = this.postsRepository.create({
-      ...createPostDto,
-      author,
-      tags,
-    });
-    post = await this.postsRepository.save(post);
-    return post;
+  public async create(createPostDto: CreatePostDto, user: UserData) {
+    return await this.createPostProvider.create(createPostDto, user);
   }
 
   /**

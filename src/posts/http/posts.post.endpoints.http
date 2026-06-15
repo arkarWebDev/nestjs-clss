@@ -1,16 +1,16 @@
 POST http://localhost:3000/posts
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImVtYWlsIjoiamFtZXNkb2VAY29kZWh1Ym1tLmNvbSIsImlhdCI6MTc4MTU1NTE2MSwiZXhwIjoxNzgxNTU4NzYxLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.ITBph-mveydRaB8pcYcQNrtoELS_Udefyit2-KuV5pA
 
 {
-    "title":"test title 3",
-    "content":"test content 3",
-    "slug":"test-title-3",
+    "title":"test title 4",
+    "content":"test content 4",
+    "slug":"test-title-4",
     "status" : "draft",
     "tags" : [1,2],
     "featureImgUrl" : "https://codehubmm.com/images/logo.png",
     "publishOn" : "2026-04-29T14:30:00.000Z",
     "meta" : {
-        "readTime" : "3 min read"
-    },
-    "authorId" : 1
+        "readTime" : "4 min read"
+    }
 }
