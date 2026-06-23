@@ -2,6 +2,8 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
 import { SignInDto } from '../dtos/signin.dto';
 import { SignInProvider } from './sign-in.provider';
+import { RefreshTokenDto } from '../dtos/refresh-token.dto';
+import { RefreshTokensProvider } from './refresh-tokens.provider';
 
 /**
  * Service to handle authentication logic
@@ -20,6 +22,11 @@ export class AuthService {
      * Inject signInProvider
      */
     private readonly signInProvider: SignInProvider,
+
+    /**
+     * Inject refreshTokensProvider
+     */
+    private readonly refreshTokensProvider: RefreshTokensProvider,
   ) {}
 
   /**
@@ -39,5 +46,12 @@ export class AuthService {
    */
   public isAuth() {
     return true;
+  }
+
+  /**
+   * Refresh tokens
+   */
+  public async refreshTokens(refreshTokenDto: RefreshTokenDto) {
+    return await this.refreshTokensProvider.refreshTokens(refreshTokenDto);
   }
 }
