@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   DefaultValuePipe,
   Get,
@@ -8,6 +9,7 @@ import {
   Post,
   Put,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create.user.dto';
 import { GetUserDto } from './dtos/get.user.dto';
@@ -55,6 +57,7 @@ export class UsersController {
     description: 'The number of page per query',
     example: 1,
   })
+  @Auth(AuthType.None)
   getUsers(
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
@@ -83,7 +86,8 @@ export class UsersController {
    * @param createUserDto - DTO containing new user data
    */
   @Post()
-  @Auth(AuthType.Bearer)
+  @Auth(AuthType.None)
+  @UseInterceptors(ClassSerializerInterceptor)
   createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
