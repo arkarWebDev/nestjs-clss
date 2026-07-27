@@ -30,17 +30,6 @@ export class UsersService {
    * @param authService
    */
   constructor(
-    /** Inject authService */
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
-
-    //** Inject ConfigService */
-    private readonly configService: config.ConfigService,
-
-    /** Inject Auth Config */
-    @Inject(authConfig.KEY)
-    private readonly authConfiguration: config.ConfigType<typeof authConfig>,
-
     /**
      * Inject user repository
      */
@@ -89,13 +78,6 @@ export class UsersService {
    * @returns
    */
   public findAll(limit: number, page: number) {
-    const isAuth = this.authService.isAuth();
-
-    const env = this.configService.get('AUTH_KEY');
-    console.log(env);
-    console.log(this.authConfiguration.fallbackUrl);
-
-    console.log('auth status:', isAuth);
     return [
       {
         name: 'kyaw kyaw',
