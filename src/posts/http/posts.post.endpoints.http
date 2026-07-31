@@ -6,7 +6,7 @@ Content-Type: application/json
     "content":"test content 1",
     "slug":"test-title-1",
     "status" : "draft",
-    "tags" : ["ai","test"],
     "featureImgUrl" : "https://codehubmm.com/images/logo.png",
-    "publishOn" : "2026-04-29T14:30:00.000Z"
+    "publishOn" : "2026-04-29T14:30:00.000Z",
+    "author": "6a6cf570071ccc8f71820a24"
 }

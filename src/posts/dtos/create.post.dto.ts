@@ -9,7 +9,7 @@ import {
   Matches,
   MinLength,
 } from 'class-validator';
-import { postStatus } from '../enums/postStatus.enum';
+import { PostStatus } from '../enums/postStatus.enum';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 /**
@@ -42,11 +42,11 @@ export class CreatePostDto {
   /** Publication status of the post */
   @ApiProperty({
     description: 'Values must be "draft", "scheduled", "published"',
-    enum: postStatus,
+    enum: PostStatus,
   })
-  @IsEnum(postStatus)
+  @IsEnum(PostStatus)
   @IsNotEmpty()
-  status!: postStatus;
+  status!: PostStatus;
 
   /** Main body content of the blog post */
   @ApiProperty({
@@ -74,6 +74,11 @@ export class CreatePostDto {
   @IsISO8601()
   @IsOptional()
   publishOn?: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  author!: string;
 
   /** Optional array of tag strings (each min 2 characters) */
   @ApiPropertyOptional({

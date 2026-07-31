@@ -18,9 +18,9 @@ export class PostsController {
    * Returns all posts for a given user
    * @param userId - The user ID from the route parameter
    */
-  @Get('/:userId')
-  public getPostsByUserId(@Param('userId') userId: string) {
-    return this.postsService.findAll(userId);
+  @Get('/')
+  public getPosts() {
+    return this.postsService.findAll();
   }
 
   /**
@@ -36,7 +36,7 @@ export class PostsController {
   })
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
-    console.log(createPostDto);
+    return this.postsService.createPost(createPostDto);
   }
 
   /**
